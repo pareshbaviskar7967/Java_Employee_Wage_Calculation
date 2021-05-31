@@ -1,15 +1,27 @@
+import java.util.function.Function;
+
 public class Employee_Wage {
 
-    public static final int Emp_RatePerHrs = 20;
-    public static final int workingDays = 20;
+    public final String companyName;
+    public final int Emp_RatePerHrs;
+    public final int workingDays;
+    public final int workingHrs;
 
-    public static int Function_EmpWage() {
+    public Employee_Wage(String companyName, int Emp_RatePerHrs, int workingDays, int workingHrs) {
+        this.companyName = companyName;
+        this.Emp_RatePerHrs = Emp_RatePerHrs;
+        this.workingDays = workingDays;
+        this.workingHrs = workingHrs;
+    }
+
+    public int Function_EmpWage() {
         int emphrs = 0;
         int totalemphrs = 0;
         int totalworkingday = 0;
+        int totalempwage = 0;
         int day = 0;
 
-        while (totalemphrs <= 100 && totalworkingday < 20) {
+        while (totalemphrs <= 100 || totalworkingday < 20) {
 
             day++;
             totalworkingday++;
@@ -33,14 +45,19 @@ public class Employee_Wage {
             }
             totalemphrs += emphrs;
         }
-        int totalempwage = totalemphrs * Emp_RatePerHrs;
-        System.out.println("The Max working Hrs : " + totalemphrs);
-        System.out.println("The Max working Days : " + totalworkingday);
-        System.out.println("The Max working Hrs : " + totalempwage);
+        totalempwage = totalemphrs * Emp_RatePerHrs;
         return totalempwage;
     }
 
     public static void main(String[] args) {
-        Function_EmpWage();
+        Employee_Wage JioMart = new Employee_Wage("JioMart", 20, 28, 100);
+        Employee_Wage DMart = new Employee_Wage("DMart", 20, 30, 105);
+        Employee_Wage AbcMart = new Employee_Wage("AbcMart", 20, 31, 98);
+        System.out.println("\nTotal Employee Wage for : " + JioMart.companyName + " And Wage is : "
+                + JioMart.Function_EmpWage() + "\n");
+        System.out.println("\nTotal Employee Wage for : " + DMart.companyName + " And Wage is : "
+                + DMart.Function_EmpWage() + "\n");
+        System.out.println(
+                "\nTotal Employee Wage for : " + AbcMart.companyName + " And Wage is : " + AbcMart.Function_EmpWage());
     }
 }
