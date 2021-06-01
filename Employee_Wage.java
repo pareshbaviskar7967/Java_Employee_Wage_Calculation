@@ -6,6 +6,7 @@ public class Employee_Wage {
     public final int Emp_RatePerHrs;
     public final int workingDays;
     public final int workingHrs;
+    public int totalempwage;
 
     public Employee_Wage(String companyName, int Emp_RatePerHrs, int workingDays, int workingHrs) {
         this.companyName = companyName;
@@ -14,11 +15,10 @@ public class Employee_Wage {
         this.workingHrs = workingHrs;
     }
 
-    public int Function_EmpWage() {
+    public void Function_EmpWage() {
         int emphrs = 0;
         int totalemphrs = 0;
         int totalworkingday = 0;
-        int totalempwage = 0;
         int day = 0;
 
         while (totalemphrs <= 100 || totalworkingday < 20) {
@@ -46,18 +46,22 @@ public class Employee_Wage {
             totalemphrs += emphrs;
         }
         totalempwage = totalemphrs * Emp_RatePerHrs;
-        return totalempwage;
+    }
+
+    @Override
+    public String toString() {
+        return "\nTotal Employee Wage for : " + companyName + " And Wage is : " + totalempwage + "\n";
     }
 
     public static void main(String[] args) {
         Employee_Wage JioMart = new Employee_Wage("JioMart", 20, 28, 100);
         Employee_Wage DMart = new Employee_Wage("DMart", 20, 30, 105);
         Employee_Wage AbcMart = new Employee_Wage("AbcMart", 20, 31, 98);
-        System.out.println("\nTotal Employee Wage for : " + JioMart.companyName + " And Wage is : "
-                + JioMart.Function_EmpWage() + "\n");
-        System.out.println("\nTotal Employee Wage for : " + DMart.companyName + " And Wage is : "
-                + DMart.Function_EmpWage() + "\n");
-        System.out.println(
-                "\nTotal Employee Wage for : " + AbcMart.companyName + " And Wage is : " + AbcMart.Function_EmpWage());
+        JioMart.Function_EmpWage();
+        System.out.println(JioMart);
+        DMart.Function_EmpWage();
+        System.out.println(DMart);
+        AbcMart.Function_EmpWage();
+        System.out.println(AbcMart);
     }
 }
