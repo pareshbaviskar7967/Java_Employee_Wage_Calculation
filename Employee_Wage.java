@@ -1,6 +1,6 @@
-import java.util.function.Function;
+//import java.util.function.Function;
 
-public class Employee_Wage {
+class CompanyWage {
 
     public final String companyName;
     public final int Emp_RatePerHrs;
@@ -8,14 +8,44 @@ public class Employee_Wage {
     public final int workingHrs;
     public int totalempwage;
 
-    public Employee_Wage(String companyName, int Emp_RatePerHrs, int workingDays, int workingHrs) {
+    public CompanyWage(String companyName, int Emp_RatePerHrs, int workingDays, int workingHrs) {
         this.companyName = companyName;
         this.Emp_RatePerHrs = Emp_RatePerHrs;
         this.workingDays = workingDays;
         this.workingHrs = workingHrs;
     }
 
-    public void Function_EmpWage() {
+    public void setTotalEmpWage(int totalempwage) {
+        this.totalempwage = totalempwage;
+    }
+
+    @Override
+    public String toString() {
+        return "\nTotal Employee Wage for : " + companyName + " And Wage is : " + totalempwage + "\n";
+    }
+}
+
+public class Employee_Wage {
+    private int no_company = 0;
+    private CompanyWage[] companyarray;
+
+    public Employee_Wage() {
+        companyarray = new CompanyWage[5];
+    }
+
+    public void addcompanywage(String companyName, int Emp_RatePerHrs, int workingDays, int workingHrs) {
+        companyarray[no_company] = new CompanyWage(companyName, Emp_RatePerHrs, workingDays, workingHrs);
+        no_company++;
+    }
+
+    private void Function_EmpWage() {
+        for (int i = 0; i < no_company; i++) {
+            companyarray[i].setTotalEmpWage(this.Function_EmpWage(companyarray[i]));
+            System.out.println(companyarray[i]);
+        }
+    }
+
+    public int Function_EmpWage(CompanyWage companyWage) {
         int emphrs = 0;
         int totalemphrs = 0;
         int totalworkingday = 0;
@@ -45,23 +75,14 @@ public class Employee_Wage {
             }
             totalemphrs += emphrs;
         }
-        totalempwage = totalemphrs * Emp_RatePerHrs;
-    }
-
-    @Override
-    public String toString() {
-        return "\nTotal Employee Wage for : " + companyName + " And Wage is : " + totalempwage + "\n";
+        return totalemphrs * companyWage.Emp_RatePerHrs;
     }
 
     public static void main(String[] args) {
-        Employee_Wage JioMart = new Employee_Wage("JioMart", 20, 28, 100);
-        Employee_Wage DMart = new Employee_Wage("DMart", 20, 30, 105);
-        Employee_Wage AbcMart = new Employee_Wage("AbcMart", 20, 31, 98);
-        JioMart.Function_EmpWage();
-        System.out.println(JioMart);
-        DMart.Function_EmpWage();
-        System.out.println(DMart);
-        AbcMart.Function_EmpWage();
-        System.out.println(AbcMart);
+        Employee_Wage empwage = new Employee_Wage();
+        empwage.addcompanywage("JioMart", 20, 28, 100);
+        empwage.addcompanywage("DMart", 20, 30, 105);
+        empwage.addcompanywage("AbcMart", 20, 31, 98);
+        empwage.Function_EmpWage();
     }
 }
